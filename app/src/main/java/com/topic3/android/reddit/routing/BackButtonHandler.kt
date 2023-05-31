@@ -31,3 +31,15 @@ fun BackButtonHandler(
 
 }
 
+@Composable
+fun BackButtonAction(onBackPressed: () -> Unit){
+    CompositionLocalProvider(
+        localBackPressedDispatcher provides(
+                LocalLifecycleOwner.current as ComponentActivity
+                ).onBackPressedDispatcher
+    ){
+        BackButtonHandler {
+            onBackPressed.invoke()
+        }
+    }
+}
